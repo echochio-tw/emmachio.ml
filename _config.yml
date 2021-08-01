@@ -1,0 +1,44 @@
+# Basic
+title: echochio
+subtitle: 
+description: 歡迎來到我的部落格
+avatarTitle: echochio
+avatarDesc: 紀錄一些雜七雜八的技術
+url: "https://echochio-tw.github.io"
+comment:
+    uyan:2128926
+
+# Social
+social:
+    # weibo: echochio-tw.github.io
+    github: echochio-tw
+    # twitter: 
+    mail: echochio@echochio-tw.github.io
+    
+ga:
+    id: UA-108823459-2   
+    host: auto  
+
+
+permalink: /:year/:month/:title/
+highlighter: rouge
+textColor: #FF0000
+cover_color: clear
+
+blog_button:
+    title: 部落格主頁
+
+# Navigation buttons in the front page.s
+nav:
+    - {title: 所有文章, description: archive, url: '/archive'}   
+    - {title: 標籤, description: tags, url: '/tags'}      
+    - {title: 關於我, description: about, url: '/about'}      
+    
+
+# Pagination
+gems: [jekyll-paginate,jekyll-sitemap,jekyll-admin]
+paginate: 20
+paginate_path: "page/:num/"
+plugins:
+          - jekyll-paginate
+paginate: 5
