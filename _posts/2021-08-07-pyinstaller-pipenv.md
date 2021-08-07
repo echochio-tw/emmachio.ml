@@ -13,7 +13,7 @@ pyinstaller打包肥大
 
 建立虛擬環境 (如裝過看下面有寫如何移除舊環境)
 ```
-pipenv install
+pip install pipenv
 ```
 
 進去 虛擬環境 安裝所需模块 之後編譯
