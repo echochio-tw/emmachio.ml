@@ -129,3 +129,4 @@ tk.Button(window, text='退出', width=10, command=window.quit).grid(row=4, colu
 img_lbl = tk.Label(window,text='')
 img_lbl.grid()
 tk.mainloop()
+```
