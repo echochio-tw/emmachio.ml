@@ -6,7 +6,7 @@ tags: mysql mysqldump
 ---
 
 做一個 ramdesk 來用
-``
+```
 mkdir /tmp/ramdisk
 chmod 777 /tmp/ramdisk
 mount -t tmpfs -o size=5G tmpfs /tmp/ramdisk
