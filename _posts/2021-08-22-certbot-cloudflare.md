@@ -142,8 +142,8 @@ for zone_name in zone_names:
 
 察到期日
 ```
-# openssl x509 -enddate -noout -in /etc/letsencrypt/live/chyese.com/fullchain1.pem
-notAfter=Nov 24 01:48:25 2021 GMT
+CERT=/etc/letsencrypt/live/chyese.com/fullchain1.pem
+date --date="$(openssl x509 -enddate -noout -in $CERT | cut -d= -f 2)" --iso-8601
 ```
 轉 key 與 crt
 ```
