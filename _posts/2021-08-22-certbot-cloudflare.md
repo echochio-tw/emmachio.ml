@@ -101,3 +101,54 @@ IMPORTANT NOTES:
    Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
    Donating to EFF:                    https://eff.org/donate-le
 ```
+
+客人說要在 godaddy 10個域名還要SSL
+
+godaddy 就亂碼產生器去買 ....
+
+NS 然後設定到 cloudflare (可以一次選那十個然後轉到 cloudflare NS)
+
+建立 cloudflare 域名管理 當然用 API 建立
+```
+zone_names = ["fnnfra.com","bebsya.com","eonfij.com","vzfqoi.com","chyese.com","azxgaq.com","mopoie.com","odyauu.com","yleoyn.com","hvppah.com"]
+for zone_name in zone_names:
+    print(zone_name)
+    cf = CloudFlare.CloudFlare(email='abcde@gmail.com', token='12a933133045909646ca34aa59737f76d999')
+    zone_info = cf.zones.post(data={'jump_start':False, 'name': zone_name})
+    zone_id = zone_info['id']
+    print(zone_id)
+```
+
+檢查 NS
+```
+import dns.resolver
+zone_names = ["fnnfra.com","bebsya.com","eonfij.com","vzfqoi.com","chyese.com","azxgaq.com","mopoie.com","odyauu.com","yleoyn.com","hvppah.com"]
+for zone_name in zone_names:
+    answers = dns.resolver.query(zone_name,'NS')
+    for server in answers:
+        print(server.target)
+```
+
+建立 SSL
+```
+import subprocess
+import shlex
+zone_names = ["fnnfra.com","bebsya.com","eonfij.com","vzfqoi.com","chyese.com","azxgaq.com","mopoie.com","odyauu.com","yleoyn.com","hvppah.com"]
+for zone_name in zone_names:
+    do = 'certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.secrets/certbot/cloudflare.ini -d *.'+ zone_name +' -d '+ zone_name
+    #print (shlex.split(do))
+    subprocess.call(shlex.split(do))
+```
+
+察到期日
+```
+# openssl x509 -enddate -noout -in /etc/letsencrypt/live/chyese.com/fullchain1.pem
+notAfter=Nov 24 01:48:25 2021 GMT
+```
+轉 key 與 crt
+```
+openssl rsa -in /etc/letsencrypt/archive/chyese.com/privkey1.pem -out /etc/letsencrypt/archive/chyese.com/privkey1.key
+openssl x509 -in /etc/letsencrypt/archive/chyese.com/fullchain1.pem -out /etc/letsencrypt/archive/chyese.com/fullchain1.crt
+```
+
+
