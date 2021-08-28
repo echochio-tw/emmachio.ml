@@ -13,7 +13,7 @@ tags: iops linux
 
 我改成 RAMDISK 鐵定翻倍 ....
 
-重點是測試工具
+重點是要拿出測試工具給客人看
 ```
  yum install  ioping
 ```
