@@ -56,8 +56,8 @@ flush privileges;
 
 安裝 zabbix_server & zabbix-agent
 ```
-yum -y install http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-1.el7.centos.noarch.rpm
-yum -y install zabbix-get zabbix-server-mysql zabbix-web-mysql zabbix-agent
+yum -y install https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm
+yum -y install zabbix-get zabbix-server-mysql zabbix-web-mysql zabbix-agent2
 cd /usr/share/doc/zabbix-server-mysql*
 gunzip create.sql.gz
 mysql -u root -p zabbix < create.sql
