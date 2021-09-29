@@ -35,7 +35,7 @@ scp masterdatabase.sql user@ip:~
 
 master 要等 slave 做完後
 ```
-mysql> UNLOCK TABLES; #要slave 好了才LOCK
+mysql> UNLOCK TABLES; #要slave 好了才UNLOCK
 ```
 
 slave my.cnf
