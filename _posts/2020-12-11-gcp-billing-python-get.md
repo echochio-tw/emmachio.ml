@@ -17,6 +17,8 @@ Click Save.
 
 GCP token service-accounts 建立
 ```
+gcloud iam service-accounts create --display-name=gitlab-ci gitlab-ci
+gcloud iam service-accounts list
 gcloud iam service-accounts keys create ~/key.json   --iam-account 3XXXXXXXX@cloudservices.gserviceaccount.com
 ```
 
