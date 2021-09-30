@@ -59,7 +59,7 @@ flush privileges;
 ```
 yum -y install https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm
 yum-config-manager --enable zabbix-frontend
-yum -y install zabbix-agent2 zabbix-apache-conf-scl zabbix-get zabbix-web zabbix-web-mysql-scl zabbix-server-mysql zabbix-web-deps-scl 
+yum -y install zabbix-agent2 zabbix-get zabbix-web zabbix-server-mysql
 cd /usr/share/doc/zabbix-server-mysql*
 gunzip create.sql.gz
 mysql -uzabbix -pmypassword zabbix < create.sql
