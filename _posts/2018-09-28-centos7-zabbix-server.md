@@ -114,6 +114,49 @@ zabbix_get -s 172.16.1.21 -p 10050 -k "mysqld-connect"
 ```
 
 
+httpd config
+```
+#
+# Zabbix monitoring system php web frontend
+#
+
+Alias /zabbix /usr/share/zabbix
+
+<Directory "/usr/share/zabbix">
+    Options FollowSymLinks
+    AllowOverride None
+    Require all granted
+
+    <IfModule mod_php7.c>
+        php_value max_execution_time 300
+        php_value memory_limit 128M
+        php_value post_max_size 16M
+        php_value upload_max_filesize 2M
+        php_value max_input_time 300
+        php_value max_input_vars 10000
+        php_value always_populate_raw_post_data -1
+        # php_value date.timezone Europe/Riga
+    </IfModule>
+</Directory>
+
+<Directory "/usr/share/zabbix/conf">
+    Require all denied
+</Directory>
+
+<Directory "/usr/share/zabbix/app">
+    Require all denied
+</Directory>
+
+<Directory "/usr/share/zabbix/include">
+    Require all denied
+</Directory>
+
+<Directory "/usr/share/zabbix/local">
+    Require all denied
+</Directory>
+```
+
+
 
  
  
