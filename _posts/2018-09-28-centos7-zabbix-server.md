@@ -20,11 +20,13 @@ systemctl start httpd
 systemctl enable httpd
 ```
 
-安裝 php 7.2
+安裝 php 7.4
 ```
-yum -y install epel-release
-sudo rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
-yum -y install mod_php72w php72w-cli php72w-common php72w-devel php72w-pear php72w-gd php72w-mbstring php72w-mysql php72w-xml php72w-bcmath
+yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum install epel-release yum-utils
+yum-config-manager --enable remi-php74
+yum install php
+yum install php-devel php-xmlrpc php-bcmath php-recode php-pdo php-mysqlnd php-common php-cli php-gd php-embedded php-ldap php-process php-pecl-zip php-dba php-json php-soap php-pear php-intl php-xml php-snmp php-mbstring php-imagick
 
 rm -rf /etc/php.ini
 cat << 'EOF' >> /etc/php.ini
