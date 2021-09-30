@@ -96,7 +96,7 @@ systemctl status zabbix-agent2
 
 設定自訂 agent
 ```
-cd /etc/zabbix/zabbix_agentd2.d/
+/etc/zabbix/zabbix_agent2.d/
 
 vi userparameter_mysql.conf
 UserParameter=login-user,who|wc -l
