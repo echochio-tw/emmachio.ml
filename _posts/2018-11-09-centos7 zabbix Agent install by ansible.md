@@ -31,13 +31,11 @@ sshpass -p 'vagrant' ssh-copy-id -i ~/.ssh/id_rsa.pub -o StrictHostKeyChecking=n
 install ansible
 ```
 yum install -y epel-release
-yum install -y python-pip python-netaddr ansible git
-pip install --upgrade pip
-pip install --upgrade Jinja2
+yum install -y ansible
 ```
-cheange Zabbix Server IP as new noe 192.168.0.100 (zabbix_agentd.conf)
+cheange Zabbix Server IP as new noe 192.168.0.100 (zabbix_agent.yml)
 ```
-sed -i 's/192.168.0.200/192.168.0.100/g' zabbix_agentd.conf
+sed -i 's/192.168.0.200/192.168.0.100/g' zabbix_agent.yml
 ```
 check client ...
 ```
