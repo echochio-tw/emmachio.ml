@@ -81,7 +81,7 @@ systemctl status zabbix-server
 
 設定 zabbix_agent
 ```
-vi /etc/zabbix/zabbix_agentd2.conf
+vi /etc/zabbix/zabbix_agent2.conf
  Server=172.16.1.2
  ServerActive=172.16.1.2
  Hostname=dy-zabbix
