@@ -49,7 +49,7 @@ systemctl enable mariadb
 mysql_secure_installation
 mysql -u root -p
 create database zabbix character set utf8 collate utf8_bin;
-grant all privileges on zabbix.* to zabbix@'localhost' identified by 'mypassword'; ; 
+grant all privileges on zabbix.* to zabbix@'localhost' identified by 'mypassword';
 flush privileges;
 ```
 
