@@ -48,19 +48,20 @@ systemctl start mariadb
 systemctl enable mariadb
 mysql_secure_installation
 mysql -u root -p
-create database zabbix; 
-grant all privileges on zabbix.* to zabbix@'localhost' identified by 'mypassword'; 
-grant all privileges on zabbix.* to zabbix@'%' identified by 'mypassword'; 
+create database zabbix character set utf8 collate utf8_bin;
+grant all privileges on zabbix.* to zabbix@'localhost' identified by 'mypassword'; ; 
 flush privileges;
 ```
 
 安裝 zabbix_server & zabbix-agent
 ```
 yum -y install https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm
-yum -y install zabbix-get zabbix-server-mysql zabbix-web-mysql zabbix-agent2
+yum -y install zabbix-server-mysql zabbix-agent2 zabbix-get
+yum-config-manager --enable zabbix-frontend
+yum -y install centos-release-scl
+yum -y install zabbix-web-mysql-scl zabbix-apache-conf-scl
 cd /usr/share/doc/zabbix-server-mysql*
-gunzip create.sql.gz
-mysql -u root -p zabbix < create.sql
+zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p mypassword
 ```
 
 config zabbix_server
@@ -79,7 +80,7 @@ systemctl status zabbix-server
 
 設定 zabbix_agent
 ```
-vi /etc/zabbix/zabbix_agentd.conf
+vi /etc/zabbix/zabbix_agentd2.conf
  Server=172.16.1.2
  ServerActive=172.16.1.2
  Hostname=dy-zabbix
@@ -87,14 +88,14 @@ vi /etc/zabbix/zabbix_agentd.conf
 
 啟動 zabbix-agent 
 ``` 
-systemctl start zabbix-agent 
-systemctl enable zabbix-agent
-systemctl status zabbix-agent
+systemctl start zabbix-agent2
+systemctl enable zabbix-agent2
+systemctl status zabbix-agent2
 ```
 
 設定自訂 agent
 ```
-cd /etc/zabbix/zabbix_agentd.d/
+cd /etc/zabbix/zabbix_agentd2.d/
 
 vi userparameter_mysql.conf
 UserParameter=login-user,who|wc -l
@@ -102,7 +103,7 @@ UserParameter=mysqld-connect,netstat -natp |grep mysql |wc -l
 ```
 
 ```
-systemctl restart zabbix-agent.service
+systemctl restart zabbix-agent2.service
 ```
 
 Server 端取資訊
