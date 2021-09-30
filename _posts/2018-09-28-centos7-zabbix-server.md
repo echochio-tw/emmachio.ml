@@ -61,7 +61,8 @@ yum-config-manager --enable zabbix-frontend
 yum -y install centos-release-scl
 yum -y install zabbix-web-mysql-scl zabbix-apache-conf-scl
 cd /usr/share/doc/zabbix-server-mysql*
-zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p mypassword
+gunzip create.sql.gz
+mysql -uzabbix -pmypassword zabbix < create.sql
 ```
 
 config zabbix_server
