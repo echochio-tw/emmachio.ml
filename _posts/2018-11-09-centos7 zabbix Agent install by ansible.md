@@ -75,11 +75,12 @@ PLAY RECAP *********************************************************************
 
 check client
 ```
-ssh 192.168.0.11
-netstat -natp |grep zabbix_agentd
+ ansible -i hosts all  -m shell -a 'netstat -natp |grep zabbix_agentd'
 
-tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      31931/zabbix_agentd
-tcp6       0      0 :::10050                :::*                    LISTEN      31931/zabbix_agentd
+172.16.0.72 | CHANGED | rc=0 >>
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      9198/zabbix_agentd
+tcp6       0      0 :::10050                :::*                    LISTEN      9198/zabbix_agentd
+
 ```
 
 check syntax yml
