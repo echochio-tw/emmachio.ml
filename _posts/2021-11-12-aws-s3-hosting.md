@@ -9,7 +9,7 @@ tags: 圖
 ```
 http://hosting.s3.ap-southeast-1.amazonaws.com/
 chang to 
-my.domain.com
+http://my.domain.com/
 ```
 
 上網找到方法有三個 客戶選第一個 測試有成功
