@@ -28,6 +28,19 @@ yum-config-manager --enable remi-php74
 yum install php
 yum install php-devel php-xmlrpc php-bcmath php-recode php-pdo php-mysqlnd php-common php-cli php-gd php-embedded php-ldap php-process php-pecl-zip php-dba php-json php-soap php-pear php-intl php-xml php-snmp php-mbstring php-imagick
 
+```
+
+or php 8
+```
+yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum -y install yum-utils
+yum-config-manager --disable 'remi-php*'
+yum-config-manager --enable remi-php80
+yum -y install php php-{cli,fpm,mysqlnd,zip,devel,gd,mbstring,curl,xml,pear,bcmath,json}
+```
+
+```
 rm -rf /etc/php.ini
 cat << 'EOF' >> /etc/php.ini
 max_execution_time = 600
