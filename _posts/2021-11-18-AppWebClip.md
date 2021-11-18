@@ -1,7 +1,7 @@
 ---
 layout: post
 title: App Web Clip
-date: 2007-06-28
+date: 2021-11-18
 tags: AppWebClip
 ---
 
