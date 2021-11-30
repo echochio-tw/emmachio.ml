@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Cython 建立 執行檔
+title: python Cython 建立 執行檔
 date: 2021-11-11
 tags: python Cython
 ---
