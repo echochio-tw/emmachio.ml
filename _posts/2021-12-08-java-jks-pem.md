@@ -22,9 +22,7 @@ Java runtime 安裝
 公共 IP 地址
 
 ```
-
 這邊使用 demo.example.com 當範例
-
 
 1. 從 LetsEncrypt 獲取 PEM 證書 (DNS 要添加 txt)
 ```
@@ -32,7 +30,6 @@ certbot certonly --manual --preferred-challenges dns -d demo.example.com dns-01 
 ```
 
 2. 將 PEM 轉換為 PKCS12 格式
-
 ```
 openssl pkcs12 -export -in fullchain1.pem -inkey privkey1.pem -out keystore.p12
 ```
