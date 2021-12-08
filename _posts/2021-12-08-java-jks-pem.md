@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 在 JKS 中使用 LetsEncrypt 證書
-date: 2012-12-08
+date: 2021-12-08
 tags: ssl jks pem
 ---
 
