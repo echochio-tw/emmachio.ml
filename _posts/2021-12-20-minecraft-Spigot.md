@@ -7,6 +7,8 @@ tags: minecraft
 
 以下其他能 如 linux 及 MacOS 的 都適用 請自行修改 .... 因為 java 跨平台
 
+windows 可用 GUI .... 請往下找後面 ....
+
 下載JAVA
 
 ```
@@ -67,3 +69,16 @@ op admin
 ```
 
 開啟 minecraft 1.18.1 多人建立 直連伺服器 127.0.0.1 或電腦IP
+
+--------------------------------------------------------------------
+windows 下載 GUI https://github.com/0uti/BuildToolsGUI/releases
+
+下到 D:\
+
+直接壓縮 後就下載 .....
+
+後來執行 spigot-1.18.1.jar (直接點就好)
+
+改 eula.txt 把內容改 eula=true
+
+再執行 spigot-1.18.1.jar
