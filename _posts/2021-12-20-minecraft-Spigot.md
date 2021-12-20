@@ -1,8 +1,8 @@
 ---
 layout: post
-title: minecraft java Spigot伺服器 
+title: minecraft java Spigot伺服器 python3
 date: 2021-12-20
-tags: minecraft
+tags: minecraft python3
 ---
 
 以下其他能 如 linux 及 MacOS 的 都適用 請自行修改 .... 因為 java 跨平台
@@ -82,3 +82,68 @@ windows 下載 GUI https://github.com/0uti/BuildToolsGUI/releases
 改 eula.txt 把內容改 eula=true
 
 再執行 spigot-1.18.1.jar
+
+-------------------------------------------------------------------------
+接下來安裝 python3 模組
+
+去下載 https://dev.bukkit.org/projects/raspberryjuice
+
+我下載到 raspberryjuice-1.11.jar
+
+放到 C:\spigot1.18\plugins
+
+下載 https://www.spigotmc.org/resources/python-plugin-for-mcpi.81664/
+
+我下載到 MCPI_plugin-0.0.3.jar
+
+放到 %AppData%\.minecraft\mods 下面
+
+啟動 spigot 其中有
+```
+[15:21:08] [Server thread/INFO]: [RaspberryJuice] Enabling RaspberryJuice v1.11
+[15:21:08] [Server thread/INFO]: [RaspberryJuice] Using port 4711
+[15:21:08] [Server thread/INFO]: [RaspberryJuice] Using RELATIVE locations
+[15:21:08] [Server thread/INFO]: [RaspberryJuice] Using RIGHT clicks for hits
+[15:21:08] [Server thread/INFO]: [RaspberryJuice] ThreadListener Started
+```
+再檢查 port 
+```
+netstat -nat |findstr 4711
+  TCP    0.0.0.0:4711           0.0.0.0:0              LISTENING       InHost
+  TCP    [::]:4711              [::]:0                 LISTENING       InHost
+```
+
+再啟動 minecraft 連上去 spigot
+```
+
+python pip
+```
+pip install mcpi
+pip install mcpi-e
+```
+
+python Hello world
+```
+from mcpi.minecraft import Minecraft
+mc = Minecraft.create()
+mc.postToChat("Hello world")
+```
+
+python 彩虹
+```
+import mcpi.minecraft as minecraft
+import mcpi.block as block
+from math import *
+
+colors = [14, 1, 4, 5, 3, 11, 10]
+
+mc = minecraft.Minecraft.create()
+height = 60
+
+mc.setBlocks(-64,0,0,64,height + len(colors),0,0)
+for x in range(0, 128):
+        for colourindex in range(0, len(colors)):
+                y = sin((x / 128.0) * pi) * height + colourindex
+                mc.setBlock(x - 64, y, 0, block.WOOL.id, colors[len(colors) - 1 - colourindex])
+				
+```
