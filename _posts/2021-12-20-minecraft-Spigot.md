@@ -117,7 +117,6 @@ netstat -nat |findstr 4711
 ```
 
 再啟動 minecraft 連上去 spigot
-```
 
 python pip
 ```
