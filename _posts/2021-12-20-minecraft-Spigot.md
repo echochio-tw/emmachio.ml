@@ -43,7 +43,6 @@ Copying spigot-1.18-R0.1-SNAPSHOT-bootstrap.jar to C:\spigot1.18\.\spigot-1.18.j
 java -Xms1024M -Xmx2048M -jar spigot-1.18.jar nogui
 ```
 
-```
 如果 出現 那再點一下 BuildTools 去執行會跑出 server.properties 及 eula.txt
 
 ```
