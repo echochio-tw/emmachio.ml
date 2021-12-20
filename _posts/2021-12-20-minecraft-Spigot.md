@@ -98,6 +98,9 @@ windows 下載 GUI https://github.com/0uti/BuildToolsGUI/releases
 
 放到 %AppData%\.minecraft\mods 下面
 
+(下載不到有放一份 https://github.com/echochio-tw/echochio-tw.github.io/tree/master/images 可去找找)
+
+
 啟動 spigot 其中有
 ```
 [15:21:08] [Server thread/INFO]: [RaspberryJuice] Enabling RaspberryJuice v1.11
