@@ -66,7 +66,7 @@ enforce-whitelist=false
 resource-pack-sha1=
 spawn-protection=16
 max-world-size=299999
-``
+```
 
 6. 改 eula.txt 為 true
 ```
@@ -94,6 +94,7 @@ eula=true
  
 15. minecraft 多人連 127.0.0.1 (看你Server 裝到哪台IP 就連哪台....多人時用playerName 可分辨的)
 16. 執行個 Hello_word.py
+
 ```
 import mcpi.block as block
 from mcpi_e.minecraft import Minecraft
