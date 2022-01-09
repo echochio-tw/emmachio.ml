@@ -1,6 +1,6 @@
 ---
 layout: post
-title: minecraft java edition craftbukkit Server 與 python3 
+title: minecraft java edition craftbukkit Server 與 python3 (推薦loading比較輕）
 date: 2022-01-10
 tags: minecraft java craftbukkit python3
 ---
