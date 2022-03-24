@@ -22,14 +22,18 @@ star_mmxxll_net.csr
 star_mmxxll_net.key
 ```
 
-.key 文檔需要保留
+.key 文檔需要保留(這是私鑰)
+
 .csr 我們需要馬上使用到這文檔中的內容
 
 進入Cheapsslsecurity 證書網站，後臺管理，
+
 選擇訂單記錄，進行重新生成證書(Re-issue Certificate)
+
 如新購選新購 
 
 進入重新生成證書頁面
+
 我們現在需要將，在之前生成 star_mmxxll_net.csr 文檔的內容，複製在這頁面中，進行提交
 
 
