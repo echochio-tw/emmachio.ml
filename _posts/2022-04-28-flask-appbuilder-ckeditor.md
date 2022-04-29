@@ -1,7 +1,7 @@
 ---
 layout: post
 title: flask-appbuilder 配合 ckeditor 發 api mail
-date: 2022-04-30
+date: 2022-04-28
 tags: flask-appbuilder
 ---
 
