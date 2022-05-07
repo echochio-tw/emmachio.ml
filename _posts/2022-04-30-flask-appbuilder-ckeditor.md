@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  flask-appbuilder 配合 ckeditor 發 api mail
-date:   2022-04-30 19:51:18 +0800
-categories: flask-appbuilder
+title: flask-appbuilder 配合 ckeditor 發 api mail
+date: 2022-04-30
+tags: flask-appbuilder
 ---
+
 需要把 登入的帳號去過濾 DB 這就紀錄一下片段.....
 ```
 class SentmailModelView(BaseView):
@@ -13,7 +14,7 @@ class SentmailModelView(BaseView):
     def mailto(self):
         return self.render_template('mail.html', base_template=appbuilder.base_template, appbuilder=appbuilder)
 ```
-mail.html
+mail.html (\% 請改成 %)
 ```
 <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700|Montserrat:400,400i,500);
@@ -27,9 +28,9 @@ mail.html
             margin-bottom: 0;
         }
     </style>
-    {% extends "appbuilder/base.html" %} {# Inherit from base.html #}
+    {\% extends "appbuilder/base.html" %} {# Inherit from base.html #}
  
-{% block content %}
+{\% block content %}
     <div id="breadcrumbs-wrapper">
         <!-- Search for small screen -->
         <div class="container">
@@ -119,5 +120,5 @@ mail.html
         })
     });
     </script>
-    {% endblock %}
+    {\% endblock %}
 ```

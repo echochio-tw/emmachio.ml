@@ -4,7 +4,7 @@ title:  flask-appbuilder 配合 ajax 顯示 HTML <table> 表格
 date:   2022-05-07
 categories: flask-appbuilder
 ---
-紀錄一下 javascript tr append 方法
+紀錄一下 javascript tr append 方法 (\% 請改成 %)
 ```
 <style>
 	@import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700|Montserrat:400,400i,500);
@@ -18,9 +18,9 @@ categories: flask-appbuilder
 		margin-bottom: 0;
 	}
 </style>
-{% extends "appbuilder/base.html" %} {# Inherit from base.html #}
+{\% extends "appbuilder/base.html" %} {# Inherit from base.html #}
 
-{% block content %}
+{\% block content %}
 <div id="breadcrumbs-wrapper">
 	<!-- Search for small screen -->
 	<div class="container">
@@ -125,6 +125,6 @@ function onSuccess(data) {
 	$('.editview-radio-box').html(html);
   }
 </script>
-{% endblock %}
+{\% endblock %}
 
 ```
