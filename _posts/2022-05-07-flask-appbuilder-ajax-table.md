@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  flask-appbuilder 配合 ajax 顯示 HTML <table> 表格
-date:   2022-05-07
+title: lask-appbuilder 配合 ajax 顯示 HTML <table> 表格
+date: 2022-05-07
 tags: flask-appbuilder
 ---
 紀錄一下 javascript tr append 方法 (\% 請改成 %)
