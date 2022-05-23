@@ -11,7 +11,6 @@ IBM 買下 Red Hat 後 CentOS 就不更新了
 
 到底是哪家替代呢？
 
-看來TW 會用 rockylinux
 
 AlmaLinux 更新好像比較快
 ```
