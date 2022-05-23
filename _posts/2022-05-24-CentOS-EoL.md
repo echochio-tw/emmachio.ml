@@ -13,11 +13,11 @@ IBM 買下 Red Hat 後 CentOS 就不更新了
 
 
 AlmaLinux 更新好像比較快
-```
+
 https://mirrors.almalinux.org/isos.html
-```
+
 
 看來TW 會用 rockylinux
-```
+
 https://rockylinux.org/zh_TW/download
-```
+
