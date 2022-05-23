@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  CentOS EoL
-date: 2022-05-24
+date: 2022-05-23
 tags: CentOS
 ---
 
@@ -13,10 +13,11 @@ IBM 買下 Red Hat 後 CentOS 就不更新了
 
 
 AlmaLinux 更新好像比較快
-
+```
 https://mirrors.almalinux.org/isos.html
-
+```
 
 看來TW 會用 rockylinux
-
+```
 https://rockylinux.org/zh_TW/download
+```
