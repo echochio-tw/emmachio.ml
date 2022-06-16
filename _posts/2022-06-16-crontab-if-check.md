@@ -25,5 +25,5 @@ tags: grep
 
 用 || 不行在 crontab
 ```
-*/5 0 * * * [ "$(ps -ef | grep 'mail-return-check.py'|grep -v grep)" ] && echo 'is running' || at now  <<< "/usr/bin/python3/root/ mail-return-check.py &"
+[ "$(ps -ef | grep 'mail-return-check.py'|grep -v grep)" ] && echo 'is running' || at now  <<< "/usr/bin/python3/root/ mail-return-check.py &"
 ```
