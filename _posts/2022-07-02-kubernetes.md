@@ -5,7 +5,7 @@ date: 2022-07-02
 tags: k8s
 ---
 
-寫一下 Ubuntu 18.04 (客戶指定版本我也沒法 ......) 安裝 kubernetes (下面用 sudo su - 處理ㄖㄞ)
+寫一下 Ubuntu 18.04 (客戶指定版本我也沒法 ......) 安裝 kubernetes (下面用 sudo su - 處理)
 
 ```
 可參考 https://docs.docker.com/engine/install/ubuntu/
