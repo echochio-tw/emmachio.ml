@@ -125,3 +125,27 @@ helm repo add stable https://charts.helm.sh/stable
 helm search repo
 ```
 
+新版本的k8s，初始化生成的token，只有24小時。超過時間，就得需要重新生成 token
+先看看 有沒有 token
+```
+kubeadm token list
+```
+
+沒有就建立一個永久的
+```
+kubeadm token create --ttl 0
+出現
+o4avtg.65ji6b778nyacw68
+```
+
+取 ca证书sha256编码hash值
+```
+openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
+出現
+a091c2335dfeb32ca55ac5f8fc00d916fa394ee3143bda480dcf70b316f5f6d1
+```
+
+node 加入
+```
+kubeadm join 172.168.0.1:6443 --token o4avtg.65ji6b778nyacw68 --discovery-token-ca-cert-hash sha256:a091c2335dfeb32ca55ac5f8fc00d916fa394ee3143bda480dcf70b316f5f6d1
+```
