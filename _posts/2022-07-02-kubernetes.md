@@ -14,7 +14,7 @@ tags: k8s
 ```
 swapoff -a
 sed -e '/swap/ s/^#*/#/' -i /etc/fstab
-
+ufw disable
 apt-get update
 apt-get install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
