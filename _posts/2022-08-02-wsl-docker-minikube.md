@@ -1,0 +1,199 @@
+---
+layout: post
+title: wsl + systemd + docker + minikube
+date: 2022-08-02
+tags: wsl
+---
+
+
+設定 wsl v2
+wsl --set-default-version 2 
+
+看已安裝的
+wsl --list -v
+
+打掉重練
+wsl --unregister Distrod
+
+
+設定記憶體及CPU核心與無SWAP
+notepad %UserProfile%\.wslconfig
+```
+[wsl2]
+memory=8GB
+processors=8
+swap=0GB
+```
+
+用這個安裝 https://linuxcontainers.org/
+下載
+```
+https://github.com/nullpo-head/wsl-distrod/releases/latest/download/distrod_wsl_launcher-x86_64.zip
+```
+
+解壓安裝 .... 用內定的 ubuntu focal 
+
+進去OS後 (這是記錄不必做)
+```
+sudo su -
+apt install curl -y
+curl -L -O "https://raw.githubusercontent.com/nullpo-head/wsl-distrod/main/install.sh"
+chmod +x install.sh
+sudo ./install.sh install
+/opt/distrod/bin/distrod enable
+```
+
+如要windows 啟動就跑 systemd (放入排程... 需windows 密碼)  (這是記錄不必做)
+``` 
+/opt/distrod/bin/distrod enable --start-on-windows-boot
+
+Distrod] Distrod has been enabled. Now your shell will start under systemd.
+[Distrod] Enabling atuomatic startup of Distrod. UAC dialog will appear because scheduling
+a task requires the admin privilege. Please hit enter to proceed.
+
+Enabling autostart has succeeded.
+[Distrod] Distrod will now start automatically on Windows startup.
+```
+
+掛入登入就是root
+及環境設定
+```
+sudo su -
+
+cat >> /root/.profile <<EOF
+[ -f /etc/resolv.conf ]  || echo nameserver 1.1.1.1 > /etc/resolv.conf
+EOF
+
+apt update
+apt upgrade
+
+printf "\n[user]\ndefault = root\n" | sudo tee -a /etc/wsl.conf
+echo -e "[network]\ngenerateResolvConf = false" | sudo tee -a /etc/wsl.conf
+cat /etc/wsl.conf
+
+sudo apt install --no-install-recommends apt-transport-https ca-certificates curl gnupg2
+update-alternatives --config iptables
+選0
+
+apt-get install -y containerd.io
+mkdir -p /etc/containerd
+containerd config default > /etc/containerd/config.toml
+systemctl restart containerd
+systemctl enable containerd
+```
+
+用官方方法安裝 docker
+```
+https://docs.docker.com/engine/install/ubuntu/
+```
+
+```
+systemctl daemon-reload
+systemctl restart docker
+systemctl enable docker
+```
+
+確認無 swap (minikube 可有 SWAP)
+```
+free -m
+              total        used        free      shared  buff/cache   available
+Mem:           7954         349        6504           0        1101        7365
+Swap:             0           0           0
+```
+
+安装 kubectl
+```
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+```
+
+安装 Minikube
+```
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```
+
+啟動minikube
+```
+minikube start
+
+minikube node list
+
+minikube dashboard --url
+# 让其它 IP 可以访问
+kubectl proxy --port=8888 --address='0.0.0.0' --accept-hosts='^.*'
+```
+
+```
+kubectl create deployment nginx --image=nginx
+kubectl expose deployment nginx --port=80 --type=NodePort
+# 获取访问地址
+minikube service --url nginx
+```
+
+```
+也可以通过 kubectl proxy 拼接 url 访问，https://kubernetes.io/zh/docs/tasks/access-application-cluster/access-cluster/#manually-constructing-apiserver-proxy-urls
+http://10.74.2.71:8888/api/v1/namespaces/default/services/nginx:80/proxy/
+```
+
+负载均衡访问，Minikube 网络
+```
+minikube tunnel --cleanup=true
+
+# 重新部署
+kubectl delete deployment nginx
+kubectl delete service nginx
+kubectl create deployment nginx --image=nginx
+kubectl expose deployment nginx --port=80 --type=LoadBalancer
+# 查看外部地址
+kubectl get svc
+
+
+kubectl port-forward pods/nginx-6799fc88d8-p8llb 8080:80 --address='0.0.0.0'
+
+```
+
+
+systemctl edit --force --full minikube.service
+```
+[Unit]
+Description=minikube
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/root
+ExecStart=/usr/local/bin/minikube start --force
+ExecStop=/usr/local/bin/minikube stop
+
+[Install]
+WantedBy=multi-user.target
+```
+
+systemctl enable minikube.service
+systemctl start minikube.service
+```
+
+一些指令
+```
+kubectl get node
+kubectl get pods -A
+kubectl get svc -A
+kubectl describe pod coredns-6d4b75cb6d-4p946 -n kube-system
+
+```
+
+
+```
+ curl -O https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+ chmod +x get-helm-3
+ ./get-helm-3
+ helm repo add projectcalico https://projectcalico.docs.tigera.io/charts
+
+
+```
+https://raw.githubusercontent.com/karthequian/docker-helloworld/master/deployment.yml
+minikube service --url helloworld
+
+```
