@@ -72,10 +72,17 @@ printf "\n[user]\ndefault = root\n" | sudo tee -a /etc/wsl.conf
 echo -e "[network]\ngenerateResolvConf = false" | sudo tee -a /etc/wsl.conf
 cat /etc/wsl.conf
 
-sudo apt install --no-install-recommends apt-transport-https ca-certificates curl gnupg2
-update-alternatives --config iptables
-選0
+sudo apt install --no-install-recommends apt-transport-https ca-certificates curl gnupg2 -y
+exit
+logout
+```
+在CMD
+```
+wsl --shutdown
+wsl
+```
 
+```
 apt-get install -y containerd.io
 mkdir -p /etc/containerd
 containerd config default > /etc/containerd/config.toml
@@ -85,11 +92,17 @@ systemctl enable containerd
 
 用官方方法安裝 docker
 ```
-https://docs.docker.com/engine/install/ubuntu/
-```
-
-```
-systemctl daemon-reload
+apt-get remove docker docker-engine docker.io containerd runc
+apt-get -y install ca-certificates curl gnupg lsb-release
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt-get update
+apt-get install  containerd.io docker-ce docker-ce-cli docker-compose-plugin
+systemctl restart containerd
+systemctl enable containerd
 systemctl restart docker
 systemctl enable docker
 ```
@@ -105,58 +118,20 @@ Swap:             0           0           0
 安装 kubectl
 ```
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 kubectl version --client
 ```
 
 安装 Minikube
 ```
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
+install minikube-linux-amd64 /usr/local/bin/minikube
+minikube start --force
 ```
-
-啟動minikube
+編輯 minikube.service
 ```
-minikube start
-
-minikube node list
-
-minikube dashboard --url
-# 让其它 IP 可以访问
-kubectl proxy --port=8888 --address='0.0.0.0' --accept-hosts='^.*'
-```
-
-```
-kubectl create deployment nginx --image=nginx
-kubectl expose deployment nginx --port=80 --type=NodePort
-# 获取访问地址
-minikube service --url nginx
-```
-
-```
-也可以通过 kubectl proxy 拼接 url 访问，https://kubernetes.io/zh/docs/tasks/access-application-cluster/access-cluster/#manually-constructing-apiserver-proxy-urls
-http://10.74.2.71:8888/api/v1/namespaces/default/services/nginx:80/proxy/
-```
-
-负载均衡访问，Minikube 网络
-```
-minikube tunnel --cleanup=true
-
-# 重新部署
-kubectl delete deployment nginx
-kubectl delete service nginx
-kubectl create deployment nginx --image=nginx
-kubectl expose deployment nginx --port=80 --type=LoadBalancer
-# 查看外部地址
-kubectl get svc
-
-
-kubectl port-forward pods/nginx-6799fc88d8-p8llb 8080:80 --address='0.0.0.0'
-
-```
-
-
 systemctl edit --force --full minikube.service
+```
 ```
 [Unit]
 Description=minikube
@@ -172,9 +147,50 @@ ExecStop=/usr/local/bin/minikube stop
 WantedBy=multi-user.target
 ```
 
-systemctl enable minikube.service
-systemctl start minikube.service
+設定 啟動minikube 
 ```
+systemctl enable minikube.service
+```
+
+```
+minikube node list
+minikube dashboard --url &
+# 让其它 IP 可以访问
+kubectl proxy --port=8888 --address='0.0.0.0' --accept-hosts='^.*'
+```
+
+會出現向這樣的
+```
+http://127.0.0.1:41789/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+```
+
+```
+kubectl create deployment nginx --image=nginx
+kubectl expose deployment nginx --port=80 --type=NodePort
+# 获取访问地址
+minikube service --url nginx
+```
+
+```
+也可以通过 kubectl proxy 拼接 url 访问
+https://kubernetes.io/zh/docs/tasks/access-application-cluster/access-cluster/#manually-constructing-apiserver-proxy-urls
+http://10.74.2.71:8888/api/v1/namespaces/default/services/nginx:80/proxy/
+```
+
+负载均衡访问，Minikube 网络
+```
+minikube tunnel --cleanup=true &
+
+# 重新部署
+kubectl delete deployment nginx
+kubectl delete service nginx
+kubectl create deployment nginx --image=nginx
+kubectl expose deployment nginx --port=80 --type=LoadBalancer
+# 查看外部地址
+
+kubectl port-forward svc/nginx 8080:80 --address='0.0.0.0'
+```
+
 
 一些指令
 ```
@@ -185,14 +201,12 @@ kubectl describe pod coredns-6d4b75cb6d-4p946 -n kube-system
 
 ```
 
-
 ```
  curl -O https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
  chmod +x get-helm-3
  ./get-helm-3
  helm repo add projectcalico https://projectcalico.docs.tigera.io/charts
-
-
+```
 ```
 https://raw.githubusercontent.com/karthequian/docker-helloworld/master/deployment.yml
 minikube service --url helloworld
