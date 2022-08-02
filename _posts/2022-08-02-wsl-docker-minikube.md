@@ -16,13 +16,14 @@ wsl --list -v
 wsl --unregister Distrod
 
 
-設定記憶體及CPU核心與無SWAP
+設定記憶體及CPU核心與無SWAP (minikube 可有 SWAP)
+
 notepad %UserProfile%\.wslconfig
 ```
 [wsl2]
-memory=8GB
+memory=4GB
 processors=8
-swap=0GB
+swap=2GB
 ```
 
 用這個安裝 https://linuxcontainers.org/
