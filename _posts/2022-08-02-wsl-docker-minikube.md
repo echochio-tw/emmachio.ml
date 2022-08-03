@@ -135,13 +135,19 @@ systemctl edit --force --full minikube.service
 ```
 [Unit]
 Description=minikube
+Wants=network-online.target
+After=network.target local-fs.target containerd.service docker.service
+Requires=containerd.service docker.service
 
 [Service]
 Type=oneshot
 RemainAfterExit=yes
 WorkingDirectory=/root
+ExecStartPre=/usr/local/bin/minikube stop
 ExecStart=/usr/local/bin/minikube start --force
 ExecStop=/usr/local/bin/minikube stop
+User=root
+Group=root
 
 [Install]
 WantedBy=multi-user.target
