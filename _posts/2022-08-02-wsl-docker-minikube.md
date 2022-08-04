@@ -218,8 +218,6 @@ https://raw.githubusercontent.com/karthequian/docker-helloworld/master/deploymen
 minikube service --url helloworld
 
 ```
-
-```
 自己的 docker file
 ```
 git clone https://github.com/echochio-tw/flask-appbuilder-docker.git
