@@ -249,7 +249,7 @@ kubectl get service flask-appbuilder
 minikube service lask-appbuilder --url
 
 輸出類似於：
-``
+```
 http://127.0.0.1:31637
 ```
 
