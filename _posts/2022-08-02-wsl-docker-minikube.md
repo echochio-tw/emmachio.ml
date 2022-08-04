@@ -244,7 +244,10 @@ kubectl expose deployment flask-appbuilder --type=NodePort --port=80
 kubectl get service flask-appbuilder
 ```
 
-minikube service lask-appbuilder --url
+获取访问地址
+```
+minikube service flask-appbuilder --url
+```
 
 輸出類似於：
 ```
