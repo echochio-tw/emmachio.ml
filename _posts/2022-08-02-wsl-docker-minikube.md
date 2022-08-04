@@ -258,3 +258,9 @@ http://127.0.0.1:31637
 ```
 http://127.0.0.1:31637
 ```
+把minikube 推出到 8080
+```
+kubectl proxy --port=8080 &
+http://127.0.0.1:8080/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+http://127.0.0.1:8080/api/v1/namespaces/default/services/flask-appbuilder/proxy/
+```
