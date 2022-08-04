@@ -218,3 +218,42 @@ https://raw.githubusercontent.com/karthequian/docker-helloworld/master/deploymen
 minikube service --url helloworld
 
 ```
+
+```
+自己的 docker file
+```
+git clone https://github.com/echochio-tw/flask-appbuilder-docker.git
+docker build -t flask-appbuilder .
+docker images
+```
+
+自建 registry
+```
+minikube addons enable registry
+docker run --rm -it --network=host alpine ash -c "apk add socat && socat TCP-LISTEN:5000,reuseaddr,fork TCP:$(minikube ip):5000" &
+```
+
+放入 registry
+```
+docker tag flask-appbuilder localhost:5000/flask-appbuilder
+docker push localhost:5000/flask-appbuilder
+```
+
+deployment 出去
+```
+kubectl create deployment flask-appbuilder --image=localhost:5000/flask-appbuilder
+kubectl expose deployment flask-appbuilder --type=NodePort --port=80
+kubectl get service flask-appbuilder
+```
+
+minikube service lask-appbuilder --url
+
+輸出類似於：
+``
+http://127.0.0.1:31637
+```
+
+瀏覽
+```
+http://127.0.0.1:31637
+```
