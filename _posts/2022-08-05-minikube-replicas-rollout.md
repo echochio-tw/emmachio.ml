@@ -12,6 +12,8 @@ minikube 關於 replicas 與 rollout 測試
 minikube addons enable registry
 docker run --rm -it --network=host alpine ash -c "apk add socat && socat TCP-LISTEN:5000,reuseaddr,fork TCP:$(minikube ip):5000" &
 ```
+git 下來 IBM 範例
+```
 git clone https://github.com/ibm-developer-skills-network/CC201.git
 
 ```
