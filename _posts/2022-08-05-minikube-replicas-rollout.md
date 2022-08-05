@@ -1,6 +1,6 @@
 ---
 layout: post
-title: minikube + kube + replicas + rollout
+title: minikube + kube + replicas + rollout + ConfigMap
 date: 2022-08-05
 tags: wsl
 ---
@@ -128,3 +128,60 @@ kubectl rollout undo deployment/hello-world
 ```
 等成功回版後在 curl 檢查
 
+建立  ConfigMap 顯示 MESSAGE內容
+```
+kubectl create configmap app-config --from-literal=MESSAGE="This message came from a ConfigMap!"
+```
+
+把內容換 deployment-configmap-env-var.yaml 的 換成 minikube registry (因裡面有 / 換成 ? 去取代指令的 /)
+```
+sed -i 's?us.icr.io/<my_namespace>?localhost:5000?g' deployment-configmap-env-var.yaml
+```
+
+看 app.js 的 res.send
+```
+cat app.js |grep res.send
+```
+
+把  res.send換成 configmap-env
+```
+export var1="res.send('Welcome to ' + hostname + '! Your app is up and running!"
+export var2="res.send(process.env.MESSAGE + '"
+sed -i "s#$var1#$var2#g" app.js
+```
+
+建立image 與部屬
+```
+docker build -t localhost:5000/hello-world:3 . && docker push localhost:5000/hello-world:3
+docker images |grep localhost:5000/hello-world
+kubectl apply -f deployment-configmap-env-var.yaml
+```
+
+```
+curl -L http://127.0.0.1:8080/api/v1/namespaces/default/services/hello-world/proxy
+```
+
+看到
+```
+This message came from a ConfigMap!
+```
+
+可換 ConfigMap 內容
+```
+kubectl delete configmap app-config
+kubectl create configmap app-config --from-literal=MESSAGE="This message test !"
+```
+砍掉原有的 pod 會換成新的
+```
+kubectl delete pod $(kubectl get pod |grep hello-world|awk '{print $1}')
+```
+
+瀏覽
+```
+curl -L http://127.0.0.1:8080/api/v1/namespaces/default/services/hello-world/proxy
+```
+
+顯示
+```
+This message test !
+```
