@@ -15,10 +15,6 @@ docker run --rm -it --network=host alpine ash -c "apk add socat && socat TCP-LIS
 git 下來 IBM 範例
 ```
 git clone https://github.com/ibm-developer-skills-network/CC201.git
-
-```
-
-```
 cd CC201/labs/3_K8sScaleAndUpdate/
 ```
 
