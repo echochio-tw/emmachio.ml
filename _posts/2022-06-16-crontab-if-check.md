@@ -27,3 +27,8 @@ tags: grep
 ```
 [ "$(ps -ef | grep 'mail-return-check.py'|grep -v grep)" ] && echo 'is running' || at now  <<< "/usr/bin/python3/root/ mail-return-check.py &"
 ```
+
+混著用(關掉 warning ....)
+```
+[ "$(ps -ef | grep 'kubectl proxy --port=8080'|grep -v grep)" ] || ([ "$(ps -ef | grep 'containerd.sock'|grep -v grep)" ] && at now <<< "sleep 10;kubectl proxy --port=8080 &" 2>&1 | fgrep -v 'warning: commands will be executed using /bin/sh')
+```
