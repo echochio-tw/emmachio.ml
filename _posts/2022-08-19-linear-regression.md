@@ -20,6 +20,9 @@ plt.show()
 ```
 計算式：
 <img src="/images/posts/regression/1.png">
+
 <img src="/images/posts/regression/2.png">
+
 <img src="/images/posts/regression/3.png">
+
 <img src="/images/posts/regression/4.png">
