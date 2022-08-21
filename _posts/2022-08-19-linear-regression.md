@@ -61,6 +61,10 @@ plt.ylabel('Width(寬)') # 設定y軸文字
 plt.legend() #顯示圖例
 plt.grid(True) #顯示格線
 plt.show() # show plt 圖
+plt.bar(length,width) #長條圖
+plt.show() # show plt 圖
+plt.pie(length,labels=width, autopct='%1.1f%%') #圓餅圖(資料, 標籤, 百分比標示)
+plt.show() # show plt 圖
 
 print(np.corrcoef(length,width).round(4)) #相關矩陣(Correlation Matrix) round是四捨五入
 print(np.polyfit(length,width,2).round(4)) #回歸係數矩陣(round是四捨五入) Y = AX + B
@@ -78,6 +82,10 @@ plt.xlabel('Length(長)') # 設定X軸文字
 plt.ylabel('Width(寬)') # 設定y軸文字
 plt.legend() #顯示圖例
 plt.grid(True) #顯示格線
+plt.show() # show plt 圖
+plt.bar(length,width) #長條圖
+plt.show() # show plt 圖
+plt.pie(length,labels=width, autopct='%1.1f%%') #圓餅圖(資料, 標籤, 百分比標示)
 plt.show() # show plt 圖
 ```
 
