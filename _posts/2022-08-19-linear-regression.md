@@ -5,6 +5,34 @@ date: 2022-08-19
 tags: Python
 ---
 
+這部分只是範例後面才是正題(不知為何有時畫不出來,但分段執行plt.show()才能畫出來)
+```
+from sklearn import datasets
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import time
+col_names = ['Sepal width', 'Sepal length', 'Petal with', 'Petal length']
+df = pd.DataFrame(datasets.load_iris().data, columns=col_names)
+sns.set(font_scale=1.5) # 字型大小
+sns.pairplot(df) # 兩兩關系圖
+plt.show()
+sns.set(font_scale=1.5) #字型大小
+print(df.corr())
+sns.heatmap(df.corr(), annot = True, vmin=-1, vmax=1) # 熱圖
+plt.show()
+sns.boxplot(data=df) #箱型圖
+plt.show()
+
+df_cols = df[['Sepal width', 'Sepal length']]
+sns.set(font_scale=1.5)
+sns.pairplot(df_cols,height=4) # 兩兩關系圖
+plt.bar(df_cols)
+time.sleep(10)
+plt.show()
+```
+
 直線回歸 用 DataFrame把圖畫出來
 
 ```
