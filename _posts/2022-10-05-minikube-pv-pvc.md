@@ -10,7 +10,7 @@ tags:
 用 kubernetes-dashboard 將yaml 加一加
 有 MOUNT 到那空間就對了
 
-<img src="/images/posts/minikube_PVC/1.pngg">
+<img src="/images/posts/minikube_PVC/1.png">
 <img src="/images/posts/minikube_PVC/2.png">
 <img src="/images/posts/minikube_PVC/3.png">
 
