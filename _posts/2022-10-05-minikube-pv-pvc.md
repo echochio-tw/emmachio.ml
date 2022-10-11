@@ -189,5 +189,9 @@ df -h |grep my-pvc
 172.30.226.133:/data    251.0G      8.0G    230.2G   3% /mnt/my-pv
 ```
  
-
+ 用 RAM DISK ... 當NFS 這邊就不重寫了
+```
+mkdir /mnt/ramdisk 
+mount -t tmpfs -o rw,size=1G tmpfs /mnt/ramdisk
+```
 
