@@ -86,7 +86,7 @@ spec:
   dnsPolicy: Default
 ```
 
-下面用 NFS當PV 記錄一下
+#下面用 NFS當PV 記錄一下
 
 ip a |grep eth0 取IP
 ```
