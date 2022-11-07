@@ -6,7 +6,9 @@ tags: postfix mail server
 ---
 
 在GCP 安裝了一台 mail server (POSTFIX) 設定資訊
+
 centos 或 ubuntu 就用套件安裝 postfix 再來設定
+
 /var/spool/postfix/etc/resolv.conf
 ```
 nameserver 8.8.8.8
@@ -124,4 +126,5 @@ systemctl restart postfix
 <img src="/images/posts/mailsrver/DKIM_SPF1.png">
 <img src="/images/posts/mailsrver/DKIM_SPF3.png">
 已設定 SPF 與 DKIM 基本收到信已不太會認為異常信件拒絕
+
 但SPAM 會有單一IP發太多還是被擋所以不能狂發信 .... 哈
