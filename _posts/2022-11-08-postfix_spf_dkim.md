@@ -7,7 +7,7 @@ tags: postfix mail server
 
 在GCP 安裝了一台 mail server (POSTFIX) 設定資訊
 
-centos 或 ubuntu 就用套件安裝 postfix 再來設定
+centos 或 ubuntu 就用套件安裝 postfix 再來設定...
 
 /var/spool/postfix/etc/resolv.conf
 ```
