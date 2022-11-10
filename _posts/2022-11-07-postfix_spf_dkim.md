@@ -128,6 +128,8 @@ DMARC 設定 是在 _dmarc.ms10.otherdomain.com 的 TXT
 ```
 v=DMARC1; p=quarantine; rua=mailto:info@ms10.otherdomain.com;
 ```
+
+```
 systemctl restart opendkim
 systemctl reload postfix
 systemctl restart postfix
