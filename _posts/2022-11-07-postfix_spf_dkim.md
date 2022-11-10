@@ -117,6 +117,16 @@ SPF 設定 (裡面 35.121.21.112 是GCP IP 這邊我的域名叫 ms10.otherdomai
 ms10.otherdomain.com  TXT v=spf1 a:ms10.otherdomain.com ip4:35.121.21.112
 ```
 
+DKIM 設定 是在 
+default._domainkey.ms10.otherdomain.com 的 TXT
+```
+v=DKIM1; k=rsa; s=email;
+p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrl95KgJkJ7vjSHdeNvSr6yNRDtqc9pWGdYl8fSjQKIdSgsshLj7EbGuIKKYh2WKHrGiDdZi4ORhhnYMKyzrUTRIjEq33SEWuYiWTHVZMMNuUiYQ4viBIDbhiPO+FPsi5rR/Veuqiet4mAoeklpDS9nVFor5wupmZW8q0p0YHHZQIDAQAB
+```
+
+DMARC 設定 是在 _dmarc.ms10.otherdomain.com 的 TXT
+```
+v=DMARC1; p=quarantine; rua=mailto:info@ms10.otherdomain.com;
 ```
 systemctl restart opendkim
 systemctl reload postfix
@@ -124,6 +134,7 @@ systemctl restart postfix
 ```
 
 <img src="/images/posts/mailsrver/DKIM_SPF1.png">
+<img src="/images/posts/mailsrver/DKIM_SPF2.png">
 <img src="/images/posts/mailsrver/DKIM_SPF3.png">
 已設定 SPF 與 DKIM 基本收到信已不太會認為異常信件拒絕
 
