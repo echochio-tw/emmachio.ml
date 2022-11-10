@@ -1,6 +1,6 @@
 ---
 layout: post
-title: mail server SPF &DKIM
+title: mail server SPF &DKIM &DMARC
 date: 2022-11-07
 tags: postfix mail server
 ---
