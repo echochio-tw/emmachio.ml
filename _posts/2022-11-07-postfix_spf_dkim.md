@@ -83,12 +83,12 @@ systemctl restart postfix
 ```
 
 這邊我的域名叫 ms10.otherdomain.com
-
+```
 mkdir -p /etc/opendkim/keys/ms10.otherdomain.com
 cd /etc/opendkim/keys/ms10.otherdomain.com
 opendkim-genkey -r -d ms10.otherdomain.com
 chown opendkim:opendkim default.private
-
+```
 
 /etc/opendkim/KeyTable
 ```
