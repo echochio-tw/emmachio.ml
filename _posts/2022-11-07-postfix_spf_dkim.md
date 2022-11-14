@@ -129,10 +129,42 @@ DMARC 設定 是在 _dmarc.ms10.otherdomain.com 的 TXT
 v=DMARC1; p=quarantine; rua=mailto:info@ms10.otherdomain.com;
 ```
 
+MX 與 mail server A 紀錄要設定
+```
+ms10.otherdomain.com A 35.121.21.112
+ms10.otherdomain.com  MX preference = 1, mail exchanger = ms10.otherdomain.com
+```
+
 ```
 systemctl restart opendkim
 systemctl reload postfix
 systemctl restart postfix
+```
+
+裝一下 發信軟體　mutt 與設定發信者
+```
+yum install -y mutt
+```
+
+vi ~/.muttrc
+```
+set edit_headers=yes
+set from="INFO <info@ms10.otherdomain.com>"
+```
+
+vi xxxx.html
+```
+<html>
+<header><title>This is title</title></header>
+<body>
+<h1> Hello world </h1>
+</body>
+</html>
+```
+
+發個信到　xxxxx@gmail.com 看是否有 SPF DKIM DMARC
+```
+mutt -e "set content_type=text/html" -s "Send mail Suject" xxxxx@gmail.com < xxxx.html
 ```
 
 <img src="/images/posts/mailsrver/DKIM_SPF1.png">
