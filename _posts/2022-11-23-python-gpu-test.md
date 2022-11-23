@@ -5,6 +5,8 @@ date: 2022-11-23
 tags: python gpu nvidia
 ---
 
+是要做 https://vast.ai/console/host/setup/ 就做一下GPU測試
+
 有 python3 後
 ```
 pip3 install numba
