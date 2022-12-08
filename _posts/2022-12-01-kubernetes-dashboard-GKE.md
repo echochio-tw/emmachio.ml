@@ -96,6 +96,8 @@ namespace:  20 bytes
 
 # ingress 的方式
 
+這邊是參考 https://cloud.google.com/community/tutorials/nginx-ingress-gke 去改的
+
 先裝 dashboard 與取 token 不設定 LoadBalancer
 
 內定是 ClusterIP
