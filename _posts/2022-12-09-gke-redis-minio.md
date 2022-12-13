@@ -5,6 +5,9 @@ date: 2022-12-09
 tags: k8s GKE
 ---
 
+需設定
+節點集區詳細資料 中繼資料 Kubernetes 標籤 type=egame
+
 ```
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
