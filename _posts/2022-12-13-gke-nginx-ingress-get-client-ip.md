@@ -1,6 +1,6 @@
 ---
 layout: post
-title: GKE nginx ingress 取 clinet IP
+title: GKE nginx ingress 取 client IP
 date: 2022-12-13
 tags: k8s GKE
 ---
