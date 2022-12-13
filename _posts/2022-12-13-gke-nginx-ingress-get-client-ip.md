@@ -100,5 +100,7 @@ X-Scheme: http
 
 參考：
 https://cloud.google.com/container-registry/docs/pushing-and-pulling
+
 https://cloud.google.com/community/tutorials/nginx-ingress-gke
+
 https://blog.horus-k.com/2021/06/17/k8s%E6%B5%81%E9%87%8F%E7%AD%96%E7%95%A5%E4%B8%8Eingress%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9Eip/
