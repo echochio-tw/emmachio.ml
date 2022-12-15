@@ -108,6 +108,7 @@ data:
 ```
 
 參考：
+
 https://cloud.google.com/container-registry/docs/pushing-and-pulling
 
 https://cloud.google.com/community/tutorials/nginx-ingress-gke
