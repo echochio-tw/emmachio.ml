@@ -10,14 +10,19 @@ tags: k8s GKE
 先设定 GCP
 防火牆規則詳細資料
 加 --> 
+
 目标标记 zabbix
 来源范围 10.16.0.0/14 (看 GKE Pod IP 位址範圍 10.16.0.0/14)
-(繼承來源：line)
-每個節點的 Pod 數量上限
-110 (繼承來源：line)
+
 TCP 10050-10051
 zabbix 加網路標記 zabbix
 GKE 叢集pool 加網路標記 zabbix
+
+所有 pod svc 都要能出去到 zabbix 要去所有node下(要去看 pod 內網IP)
+
+```
+iptables -A POSTROUTING -d 10.140.0.0/20 -m addrtype ! --dst-type LOCAL -j MASQUERADE -t nat
+```
 
 ```
 helm repo add zabbix-chart-6.2 https://cdn.zabbix.com/zabbix/integrations/kubernetes-helm/6.2/
