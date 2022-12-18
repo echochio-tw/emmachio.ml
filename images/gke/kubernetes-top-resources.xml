@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.0</version>
+    <date>2022-09-08T21:01:34Z</date>
+    <groups>
+        <group>
+            <uuid>28d23466ff764c09ad6a6146d4a94bb5</uuid>
+            <name>AKS</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <uuid>52cfde37289b437d8c20252971740c9a</uuid>
+            <template>Kubernetes Top Resources by kubectl</template>
+            <name>Kubernetes Top Resources by kubectl</name>
+            <description>Template customizado para buscar informações de CPU e memória de um cluster Kubernetes na Azure (AKS).</description>
+            <groups>
+                <group>
+                    <name>AKS</name>
+                </group>
+            </groups>
+            <discovery_rules>
+                <discovery_rule>
+                    <uuid>ac49444ee5684e2c8ef463a035fd8433</uuid>
+                    <name>Discovery cluster</name>
+                    <key>discovery.k8s.cluster</key>
+                    <delay>10m</delay>
+                    <filter>
+                        <evaltype>AND</evaltype>
+                        <conditions>
+                            <condition>
+                                <macro>{#NAMESPACE}</macro>
+                                <value>{$NAMESPACE.MATCHES}</value>
+                                <formulaid>A</formulaid>
+                            </condition>
+                            <condition>
+                                <macro>{#NAMESPACE}</macro>
+                                <value>{$NAMESPACE.NOT_MATCHES}</value>
+                                <operator>NOT_MATCHES_REGEX</operator>
+                                <formulaid>B</formulaid>
+                            </condition>
+                        </conditions>
+                    </filter>
+                    <item_prototypes>
+                        <item_prototype>
+                            <uuid>cc8082700c164c90b1b530cb012d583c</uuid>
+                            <name>Node: {#NODE} memory usage (Bytes)</name>
+                            <type>CALCULATED</type>
+                            <key>discovery.k8s.node.bytes.mem[{#NODE}]</key>
+                            <value_type>FLOAT</value_type>
+                            <units>Bytes</units>
+                            <params>(last(//discovery.k8s.node.mem[{#NODE}])*1048576)</params>
+                            <tags>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>memory</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>21aa75a97aac4d258b17bbff4fdc97c7</uuid>
+                            <name>Node: {#NODE} cpu usage (millicores)</name>
+                            <key>discovery.k8s.node.cpu[{#NODE}]</key>
+                            <units>m</units>
+                            <tags>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>cpu</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>a7f09d553d7141729f2ab3972e6d487e</uuid>
+                            <name>Node: {#NODE} memory usage (Mebibytes)</name>
+                            <key>discovery.k8s.node.mem[{#NODE}]</key>
+                            <tags>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>memory</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>f347ade9cc8248fbbdb6cf807df502ab</uuid>
+                            <name>Node: {#NODE} cpu usage %</name>
+                            <key>discovery.k8s.node.pcpu[{#NODE}]</key>
+                            <units>%</units>
+                            <tags>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>cpu</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>2b7f18fa044b427291dc8ded46513037</uuid>
+                            <name>Node: {#NODE} memory usage %</name>
+                            <key>discovery.k8s.node.pmem[{#NODE}]</key>
+                            <units>%</units>
+                            <tags>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>memory</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>c631f39661074a8190016aff73737bed</uuid>
+                            <name>Pod: {#NAME} NS: {#NAMESPACE} memory usage (Bytes)</name>
+                            <type>CALCULATED</type>
+                            <key>discovery.k8s.npods.bytes.mem[{#NAME},{#NAMESPACE}]</key>
+                            <value_type>FLOAT</value_type>
+                            <units>Bytes</units>
+                            <params>last(//discovery.k8s.npods.mem[{#NAME},{#NAMESPACE}])*1048576</params>
+                            <tags>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>memory</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>2219a59aa6344541a76a1431cb9015fc</uuid>
+                            <name>Pod: {#NAME} NS:{#NAMESPACE} cpu usage (millicores)</name>
+                            <key>discovery.k8s.npods.cpu[{#NAME},{#NAMESPACE}]</key>
+                            <units>m</units>
+                            <tags>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>cpu</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                        <item_prototype>
+                            <uuid>fdf0c0c970cc4cfe8f6530082c48ab91</uuid>
+                            <name>Pod: {#NAME} NS: {#NAMESPACE} memory usage (Mebibytes)</name>
+                            <key>discovery.k8s.npods.mem[{#NAME},{#NAMESPACE}]</key>
+                            <value_type>FLOAT</value_type>
+                            <tags>
+                                <tag>
+                                    <tag>component</tag>
+                                    <value>memory</value>
+                                </tag>
+                            </tags>
+                        </item_prototype>
+                    </item_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <uuid>843425cffd99490e8f1c2100f4687772</uuid>
+                            <name>Kubernetes node {#NODE} avg cpu % usage</name>
+                            <ymin_type_1>FIXED</ymin_type_1>
+                            <ymax_type_1>FIXED</ymax_type_1>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <item>
+                                        <host>Kubernetes Top Resources by kubectl</host>
+                                        <key>discovery.k8s.node.pcpu[{#NODE}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <uuid>4533a7cb52134c7ca6accd3ac02903fc</uuid>
+                            <name>Kubernetes Pod: {#NAME} Namespace: {#NAMESPACE} avg cpu usage</name>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <item>
+                                        <host>Kubernetes Top Resources by kubectl</host>
+                                        <key>discovery.k8s.npods.cpu[{#NAME},{#NAMESPACE}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <uuid>8135c780c537431f9a1fe4b4fc4c12eb</uuid>
+                            <name>Kubernetes Pod: {#NAME} Namespace: {#NAMESPACE} avg memory usage</name>
+                            <graph_items>
+                                <graph_item>
+                                    <color>1A7C11</color>
+                                    <item>
+                                        <host>Kubernetes Top Resources by kubectl</host>
+                                        <key>discovery.k8s.npods.bytes.mem[{#NAME},{#NAMESPACE}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$NAMESPACE.MATCHES}</macro>
+                    <value>^.*$</value>
+                </macro>
+                <macro>
+                    <macro>{$NAMESPACE.NOT_MATCHES}</macro>
+                    <value>(^whatever-blah$)</value>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+</zabbix_export>
