@@ -124,16 +124,19 @@ zabbix_get -s 127.0.0.1 -p 10050 -k 'discovery.k8s.npods.cpu[redis-master-0,majo
 
 zabbix 內建立一個主機叫 GKE 用 Template: Kubernetes Top Resources by kubectl (匯入)
 
-
-
+<img src="/images/gke/1.png">
 
 在 configuration 內 hosts 的 GKE 裡面選 Discovery 建立 Discovery cluster
+
+<img src="/images/gke/2.png">
+
 ```
 Name: Discovery cluster
 key: discovery.k8s.cluster
 Host interface: 127.0.0.1:10050
 Update interval: 10m
 ```
+<img src="/images/gke/3.png">
 
 過一下子可出現 Item prototypes 有東西
 
@@ -141,7 +144,6 @@ Trigger prototypes 要自建立
 
 過一下 GKE 這個 host 就有圖了
 
-
-
+<img src="/images/gke/4.png">
 這邊是參考
 https://faun.dev/c/stories/filipisaci/httpsmediumcomfilipisacicreating-a-zabbix-low-level-discovery-rule-step-by-step-1e30f7b516d7/
