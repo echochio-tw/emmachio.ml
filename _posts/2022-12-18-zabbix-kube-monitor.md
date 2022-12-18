@@ -147,5 +147,11 @@ Trigger prototypes 要自建立
 過一下 GKE 這個 host 就有圖了
 
 <img src="/images/gke/4.png">
+
+後記:發生 kubectl top nodes 會錯誤
+
+重啟 GKE metrics-server (在kube-system) 就好了
+
 這邊是參考
-https://faun.dev/c/stories/filipisaci/httpsmediumcomfilipisacicreating-a-zabbix-low-level-discovery-rule-step-by-step-1e30f7b516d7/
+
+[https://faun.dev/c/stories/filipisaci/httpsmediumcomfilipisacicreating-a-zabbix-low-level-discovery-rule-step-by-step-1e30f7b516d7/](https://faun.dev/c/stories/filipisaci/httpsmediumcomfilipisacicreating-a-zabbix-low-level-discovery-rule-step-by-step-1e30f7b516d7/)
