@@ -101,7 +101,6 @@ UserParameter=discovery.k8s.npods.cpu[*],/usr/lib/zabbix/externalscripts/zbx_k8s
 systemctl restart zabbix-agent.service
 ```
 
-```
 自動偵測 測試
 ```
 zabbix_agentd -t discovery.k8s.cluster
