@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 用 kubectl top nodes 顯示負載量
-date: 2022-12-18
+date: 2022-12-1
 tags: k8s GKE
 ---
 
@@ -11,7 +11,6 @@ NAME                          CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
 gke-happy-pool-03c06af7-rr1p   221m         5%     2018Mi          15%
 gke-happy-pool-6ec0146d-pdk6   294m         7%     2358Mi          17%
 gke-happy-pool-f6d3a1c3-lxg1   258m         6%     2661Mi          20%
-
 ```
 如果用 ssh 到原本的 user 那環境都會存在例如 gcloud ......
 
