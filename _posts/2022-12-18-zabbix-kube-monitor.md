@@ -124,7 +124,7 @@ zabbix_get -s 127.0.0.1 -p 10050 -k 'discovery.k8s.npods.cpu[redis-master-0,majo
 
 zabbix 內建立一個主機叫 GKE 用 Template: Kubernetes Top Resources by kubectl (匯入)
 
- [kubernetes-top-resources.xml](./images/gke/kubernetes-top-resources.xml)
+ [kubernetes-top-resources.xml](/images/gke/kubernetes-top-resources.xml)
 
 <img src="/images/gke/1.png">
 
