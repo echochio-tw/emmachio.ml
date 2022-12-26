@@ -15,7 +15,7 @@ wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-server_5.7.40-1ubuntu18
 
 安裝
 ```
-tar zvf mysql-server_5.7.40-1ubuntu18.04_amd64.deb-bundle.tar
+tar xvf mysql-server_5.7.40-1ubuntu18.04_amd64.deb-bundle.tar
 apt-get install ./libmysql*
 apt-get install libmecab2
 apt-get install ./mysql-community-client_5.7.40-1ubuntu18.04_amd64.deb 
