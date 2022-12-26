@@ -44,8 +44,12 @@ cloud SQL 內網IP 10.3.7.29
 
 才能只行下面 sell (不同自行修改)
 
-設定config
+
 ```
+#!/bin/bash
+USER="root"
+PASSWORD="loveme"
+
 cat <<EOF > /etc/mysql/mysql.conf.d/mysqld.cnf
 [mysqld]
 pid-file        = /var/run/mysqld/mysqld.pid
@@ -69,14 +73,8 @@ EOF
 
 systemctl stop mysql
 systemctl start mysql
-```
 
-```
-#!/bin/bash
-USER="root"
-PASSWORD="loveme"
-
-databases=`mysql -u $USER -p$PASSWORD -e "CREATE USER 'rep'@'%' IDENTIFIED BY 'loveme';GRANT REPLICATION SLAVE ON *.* TO 'rep'@'%';"
+mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "CREATE USER 'rep'@'%' IDENTIFIED BY 'loveme';GRANT REPLICATION SLAVE ON *.* TO 'rep'@'%';"
 
 databases=`mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "SHOW DATABASES;" | tr -d "| " | grep -v Database`
 mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "FLUSH TABLES WITH READ LOCK;show master status;"
