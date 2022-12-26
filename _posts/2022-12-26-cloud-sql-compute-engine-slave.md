@@ -8,9 +8,9 @@ GCP Cloud SQL MYSQL 5.7.40
 
 Ubuntu 18.04 slave (GCP compute engine)
 
-下載 mysql-server_5.7.40-1ubuntu18.04_amd64.deb-bundle.tar
+下載 https://dev.mysql.com/downloads/mysql/5.7.html
 ```
-https://dev.mysql.com/downloads/mysql/5.7.html
+wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-server_5.7.40-1ubuntu18.04_amd64.deb-bundle.tar
 ```
 
 安裝
