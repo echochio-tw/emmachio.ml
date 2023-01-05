@@ -48,7 +48,8 @@ cloud SQL 內網IP 10.3.7.29
 ```
 #!/bin/bash
 USER="root"
-PASSWORD="loveme"
+PASSWORD="cloudsqlpass"
+PASSWORD2="localsqlpass"
 
 cat <<EOF > /etc/mysql/mysql.conf.d/mysqld.cnf
 [mysqld]
@@ -74,6 +75,8 @@ EOF
 systemctl stop mysql
 systemctl start mysql
 
+mysql -uroot -p$PASSWORD2 -e "show databases" | grep -v Database | grep -v mysql| grep -v information_schema| gawk '{print "drop database `" $1 "`;select sleep(0.1);"}' | mysql -uroot -p$PASSWORD2
+
 mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "CREATE USER 'rep'@'%' IDENTIFIED BY 'loveme';GRANT REPLICATION SLAVE ON *.* TO 'rep'@'%';"
 
 databases=`mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "SHOW DATABASES;" | tr -d "| " | grep -v Database`
@@ -84,11 +87,14 @@ for db in $databases; do
     fi
 done
 lock=`mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "show master status;" | grep -v File |awk '{print $(NF)'}`
-mysql -u $USER -p$PASSWORD -e "CHANGE MASTER TO MASTER_HOST='10.3.7.29', MASTER_USER='rep',MASTER_PASSWORD='loveme', MASTER_AUTO_POSITION=1;"
-mysql -u $USER -p$PASSWORD -e "stop slave;"
-mysql -u $USER -p$PASSWORD -e "reset master;"
-mysql -u $USER -p$PASSWORD -e "set global gtid_purged='$lock';"
-mysql -u $USER -p$PASSWORD -e "start slave;"
+mysql -u $USER -p$PASSWORD2 -e "CHANGE MASTER TO MASTER_HOST='10.3.7.29', MASTER_USER='rep',MASTER_PASSWORD='loveme', MASTER_AUTO_POSITION=1;"
+mysql -u $USER -p$PASSWORD2 -e "stop slave;"
+mysql -u $USER -p$PASSWORD2 -e "reset master;"
+mysql -u $USER -p$PASSWORD2 -e "set global gtid_purged='$lock';"
+mysql -u $USER -p$PASSWORD2 -e "start slave;"
 mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "UNLOCK TABLES;"
-mysql -u $USER -p$PASSWORD -e "show slave status\G"
+mysql -u $USER -p$PASSWORD2 -e "show slave status\G"
 ```
+用 sed 換 10.3.7.29, cloudsqlpass, localsqlpass, loveme
+
+
