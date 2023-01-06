@@ -36,14 +36,15 @@ systemctl start mysql.service
 systemctl enable mysql.service
 ```
 
-MYSQL root 密碼設定 loveme
+MYSQL root 密碼是 localsqlpass
 
-cloud SQL root 也是 loveme
+cloud SQL root 密碼是 cloudsqlpass
 
-cloud SQL 內網IP 10.3.7.29 
+cloud SQL rep 密碼是 密碼是
 
-才能只行下面 sell (不同自行修改)
+cloud SQL 內網IP 10.3.7.29
 
+才能只行下面 sell (不同自行修改 用 sed 換 10.3.7.29, cloudsqlpass, localsqlpass, loveme)
 
 ```
 #!/bin/bash
@@ -77,16 +78,19 @@ systemctl start mysql
 
 mysql -uroot -p$PASSWORD2 -e "show databases" | grep -v Database | grep -v mysql| grep -v information_schema| gawk '{print "drop database `" $1 "`;select sleep(0.1);"}' | mysql -uroot -p$PASSWORD2
 
+# 下面兩行是刪除 rep user 與建立 rep user 如有了請自行註解或 自行改 rep 密碼
+mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "DROP USER 'rep'@'%';"
 mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "CREATE USER 'rep'@'%' IDENTIFIED BY 'loveme';GRANT REPLICATION SLAVE ON *.* TO 'rep'@'%';"
 
 databases=`mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "SHOW DATABASES;" | tr -d "| " | grep -v Database`
 mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "FLUSH TABLES WITH READ LOCK;show master status;"
 for db in $databases; do
     if [[ "$db" != "information_schema" ]] && [[ "$db" != "performance_schema" ]] && [[ "$db" != "mysql" ]] && [[ "$db" != _* ]] ; then
-        mysqldump -u $USER -p$PASSWORD -h 10.3.7.29 --databases $db | mysql -u $USER -p$PASSWORD
+        mysqldump -u $USER --set-gtid-purged=off -p$PASSWORD -h 10.3.7.29 --databases $db | mysql -u $USER -p$PASSWORD
     fi
 done
 lock=`mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "show master status;" | grep -v File |awk '{print $(NF)'}`
+# 下面這行是請自行改 rep 密碼
 mysql -u $USER -p$PASSWORD2 -e "CHANGE MASTER TO MASTER_HOST='10.3.7.29', MASTER_USER='rep',MASTER_PASSWORD='loveme', MASTER_AUTO_POSITION=1;"
 mysql -u $USER -p$PASSWORD2 -e "stop slave;"
 mysql -u $USER -p$PASSWORD2 -e "reset master;"
@@ -96,5 +100,3 @@ mysql -u $USER -p$PASSWORD -h 10.3.7.29 -e "UNLOCK TABLES;"
 mysql -u $USER -p$PASSWORD2 -e "show slave status\G"
 ```
 用 sed 換 10.3.7.29, cloudsqlpass, localsqlpass, loveme
-
-
