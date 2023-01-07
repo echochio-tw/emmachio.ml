@@ -11,7 +11,7 @@ tags: grep
 
 就用 at now 放背景....
 
-用 一行 if 去跑
+用 一行 if 去跑(發現 Ubuntu 不能執行, 在 crontab 第一行加 SHELL=/bin/bash 就可)
 
 ```
 */5 * * * * ps -ef | grep mail-return-check.py|grep -v grep;[ $? == 1 ] &&  at now  <<< "/usr/bin/python3 /root/mail-return-check.py &"
