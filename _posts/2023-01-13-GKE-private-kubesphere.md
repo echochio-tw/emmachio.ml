@@ -8,7 +8,7 @@ tags: GCP
 
 kubesphere 安裝就依照官方網站安裝
 ```
-kubesphere/ks-installer/releases/download/v3.3.1/kubesphere-installer.yaml
+kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.3.1/kubesphere-installer.yaml
 kubectl apply -f https://github.com/kubesphere/ks-installer/releases/download/v3.3.1/cluster-configuration.yaml
 ```
 看安裝過程 log
