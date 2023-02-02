@@ -92,7 +92,64 @@ token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IklPbXpYU2NYSWJ3WDJ2X0dCbC1WWEZsS0VjaFoz
 ca.crt:     1509 bytes
 namespace:  20 bytes
 ```
+ReadOnly user
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: read-user
+  namespace: kubernetes-dashboard
+EOF
+```
 
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: read-user
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["get", "watch", "list"]        
+EOF
+```
+
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: read-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  name: read-user
+  kind: ClusterRole
+subjects:
+  - kind: ServiceAccount
+    name: read-user
+    namespace: kubernetes-dashboard
+EOF
+```
+
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: read-user
+  annotations:
+    kubernetes.io/service-account.name: "read-user"
+type: kubernetes.io/service-account-token
+EOF
+```
+
+```
+export READBOARD=$(kubectl -n kubernetes-dashboard get secret |awk '{print $1}'|grep read-user)
+echo $READBOARD
+kubectl -n kubernetes-dashboard  describe secret $READBOARD
+```
 
 # ingress 的方式
 
