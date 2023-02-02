@@ -62,7 +62,7 @@ eyJhbGciOiJSUzI1NiIsImtpZCI6ImNNMmJ1TmNZX2kwRUd5SXl1TmdYdnBuSkhCMG1kdXBsWGcteFlj
 
 建立不過期 Secret
 ```
-#cat <<EOF | kubectl apply -f -
+cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
