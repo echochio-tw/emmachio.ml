@@ -207,3 +207,30 @@ dashboard-ingress   <none>   dashboard.testme.com   35.226.14.113   80      15
 設定 DNS dashboard.testme.com ->  35.226.14.113   
 
 訪問 http://dashboard.testme.com
+
+如果是 Private clusters GKE
+
+發現 CPU 及 記憶體 沒資訊
+
+LOG 看是
+```
+Metric client health check failed: the server is currently unable to handle the request (get services dashboard-metrics-scraper). Retrying in 30 seconds.
+Internal error occurred: No metric client provided. Skipping metrics.
+```
+
+直接用 kubernetes-dashboard 線上修改 kubernetes-dashboard deployments 的 yaml
+
+找到原本是
+```
+          args:
+            - '--auto-generate-certificates'
+            - '--namespace=kubernetes-dashboard'
+```
+
+變成
+```
+          args:
+            - '--auto-generate-certificates'
+            - '--namespace=kubernetes-dashboard'
+            - '--sidecar-host=http://dashboard-metrics-scraper.kubernetes-dashboard.svc.cluster.local:8000'
+```
