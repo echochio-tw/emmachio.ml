@@ -41,3 +41,9 @@ spec:
               number: 80
 EOF
 ```
+
+```
+https://grafana.echochio.ml
+admin
+changemechangeme
+```
