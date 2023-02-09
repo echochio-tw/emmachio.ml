@@ -7,7 +7,7 @@ tags: k8s
 
 修改一下shell 讓 ingress 重啟
 ```
-cat <<EOF > ./ingress_reretart.sh
+cat <<EOF > ./ingress_restart.sh
 #!/usr/bin/bash
 mkdir -p ./tmp
 _item_list=$(kubectl get ingress -n major|grep -v NAME | awk '{print $1}' )
@@ -25,10 +25,10 @@ EOF
 
 修改成可執行
 ```
-chmod +x ./ingress_reretart.sh
+chmod +x ./ingress_restart.sh
 ```
 
 執行就重啟nginx 了
 ```
-./ingress_reretart.sh
+./ingress_restart.sh
 ```
