@@ -97,7 +97,8 @@ function start() {
 
 7. 最后，单击“运行”按钮以启动您的脚本，并确保您已将其部署为 Web 应用程序（选择“发布”>“部署为 Web 应用程序”）。这将为您提供一个 URL，
 
-用房間號與前導來判斷
+
+這邊我加上改一下 （用房間號與前導來判斷）
 ```
 function doPost(e) {
   var token = '1272333:AAH6d_w1222OtqZsdddZQ1Sh_vbj840';
