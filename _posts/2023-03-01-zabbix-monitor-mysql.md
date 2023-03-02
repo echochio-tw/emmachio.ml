@@ -1,7 +1,7 @@
 ---
 layout: post
 title: zabbix 監控 mysql
-date: 2007-06-28
+date: 2023-03-02
 tags: zabbix mysql
 ---
 zabbix 監控 mysql
