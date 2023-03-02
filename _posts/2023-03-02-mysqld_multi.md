@@ -7,8 +7,9 @@ tags: 單機多 mysql
 
 列表一下看裝了哪些
 
+```
 apt list --installed |grep mysql
-
+```
 ```
 libmysqlclient-dev/bionic-updates,bionic-security,now 5.7.41-0ubuntu0.18.04.1 amd64 [installed]
 libmysqlclient20/bionic-updates,bionic-security,now 5.7.41-0ubuntu0.18.04.1 amd64 [installed]
