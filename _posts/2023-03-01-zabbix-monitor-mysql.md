@@ -1,7 +1,7 @@
 ---
 layout: post
 title: zabbix 監控 mysql
-date: 2023-03-02
+date: 2023-03-01
 tags: zabbix mysql
 ---
 zabbix 監控 mysql
@@ -35,11 +35,3 @@ l ssh"
   /usr/local/bin/kubectl exec -ti $(kubectl get pod -l app=mysql -o name -n project) -n project -- sh -c "sshpass -p 'psword' ssh -NfR 9000:127.0.0.1:3306 root@10.140.0.11 -o StrictHostKeyChecking=no"
 fi
 ```
-
-
-
-2023-03-01-zabbix-monitor-mysql.md
-
-```
-SHELL=/bin/bash
- ps -ef | grep pods_check.py|grep -v grep;[ $? == 1 ] &&  at now  <<< "/usr/bin/python3 /root/pods_check.py &"
