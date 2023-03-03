@@ -1,6 +1,6 @@
 ---
 layout: post
-title: zabbix web 間控
+title: zabbix wb 監控
 date: 2023-03-03
 tags: zabbix web
 ---
