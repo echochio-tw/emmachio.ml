@@ -51,3 +51,10 @@ kubectl logs -f --tail=20 $(kubectl get pods -A|grep ingress-nginx-controller|aw
 34.87.99.99 - - [03/Mar/2023:04:16:42 +0000] "GET /api/status HTTP/1.1" 200 246 "-" "-" 305 0.220 [-] [] 10.15.4.212:8907 246 0.220 200 fe0dcab535e4e57f5307e9ed9edcc0e2
 34.87.99.99 - - [03/Mar/2023:04:17:42 +0000] "GET /api/status HTTP/1.1" 200 246 "-" "Zabbix" 325 0.244 [-] [] 10.15.4.212:8907 246 0.243 200 b30c3257b659f0cd0a8933e3308a34fa
 ```
+
+可建立一個 nginx pod 去 curl 內部 pod 測試
+```
+kubectl run nginx --image=nginx --restart=Never
+kubectl exec --stdin --tty -n -- /bin/bash
+kubectl delete pod nginx
+```
