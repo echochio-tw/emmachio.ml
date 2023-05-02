@@ -12,11 +12,11 @@ Google Apps Script  使用 telegram bot 連接  ChatGPT API 回應至  telegram 
 
 ChatGPT 回：
 
-1. 要使用 Google Apps Script 连接 ChatGPT API 并将回复发送到 Telegram 群组，您需要完成以下步骤：
+#1 要使用 Google Apps Script 连接 ChatGPT API 并将回复发送到 Telegram 群组，您需要完成以下步骤：
 
-2. 创建一个 Telegram bot 并获取 bot 的 token。
+#2 创建一个 Telegram bot 并获取 bot 的 token。
 
-3. 在 Google Apps Script 编辑器中创建一个新项目，并将项目命名为您喜欢的名称。
+#3 在 Google Apps Script 编辑器中创建一个新项目，并将项目命名为您喜欢的名称。
 
 在代码编辑器中添加以下代码，以使用 Telegram bot API 进行身份验证并从 Telegram 群组接收消息：
 ```
@@ -39,7 +39,7 @@ function getUpdates() {
 }
 ```
 
-4. 添加以下代码以连接到 ChatGPT API 并获取 ChatGPT 的回复：
+#4 添加以下代码以连接到 ChatGPT API 并获取 ChatGPT 的回复：
 ```
 function getResponse(text) {
   var url = 'https://api.openai.com/v1/engine/your_engine_name/completions';
@@ -67,9 +67,9 @@ function getResponse(text) {
 }
 ```
 
-这将使用 OpenAI 的 API 进行自然语言处理，并返回 ChatGPT 的响应。
+这将使用 OpenAI 的 API 进行自然语言处理，并返回 ChatGPT 的响应
 
-5. 最后，添加以下代码以向 Telegram 群组发送 ChatGPT 的回复：
+#5 最后，添加以下代码以向 Telegram 群组发送 ChatGPT 的回复：
 ```
 function sendResponse(text, chat_id) {
   var url = telegramUrl + '/sendMessage?chat_id=' + chat_id + '&text=' + text;
@@ -81,7 +81,7 @@ function sendResponse(text, chat_id) {
 
 这将使用 Telegram bot API 向特定的 Telegram 群组发送回复。
 
-6. 为了使脚本定期检查是否有新的消息需要回复，您可以使用 setInterval() 函数，例如：
+#6. 为了使脚本定期检查是否有新的消息需要回复，您可以使用 setInterval() 函数，例如：
 ```
 function start() {
   setInterval(function() {
@@ -95,7 +95,7 @@ function start() {
 ```
 此函数将每隔 1 秒钟检查是否有新的消息，并自动回复。您可以根据需要更改此间隔时间。
 
-7. 最后，单击“运行”按钮以启动您的脚本，并确保您已将其部署为 Web 应用程序（选择“发布”>“部署为 Web 应用程序”）。这将为您提供一个 URL，
+#7. 最后，单击“运行”按钮以启动您的脚本，并确保您已将其部署为 Web 应用程序（选择“发布”>“部署为 Web 应用程序”）。这将为您提供一个 URL，
 
 
 這邊我加上改一下 （用房間號與前導來判斷）
