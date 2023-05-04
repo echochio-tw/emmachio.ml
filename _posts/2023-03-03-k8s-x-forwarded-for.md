@@ -41,7 +41,7 @@ metadata:
 
 看 log 最後20(持續 tail -f )
 ```
-kubectl logs -f --tail=20 $(kubectl get pods -A|grep ingress-nginx-controller|awk '{print $2}')
+kubectl logs -f --tail=20 $(kubectl get pods -A|grep ingress-nginx-controller|awk '{print $2}') -n $(kubectl get pods -A|grep ingress-nginx-controller|awk '{print $1}')
 ```
 
 ```
